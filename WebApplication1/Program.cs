@@ -16,6 +16,11 @@ app.MapGet("/getproduct/{code}", ([FromRoute] string code) =>
     return product;
 });
 
+app.MapPut("/changeproduct", (Product product) =>
+{
+   var produto = ProductRepository.GetBy(product.Code);
+    produto.Name = product.Name;
+});
 
 
 app.Run();
