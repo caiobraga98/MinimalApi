@@ -4,24 +4,22 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
-app.MapGet("/caio", () => "Hello World by Caio!");
-app.MapGet("/getproduct", () => "Hello World by Caio!");
-app.MapPost("/insertproduct", (Product product) =>
+app.MapPost("/product", (Product product) =>
 {
     ProductRepository.Add(product);
 });
-app.MapGet("/getproduct/{code}", ([FromRoute] string code) =>
+app.MapGet("/product/{code}", ([FromRoute] string code) =>
 {
     var product = ProductRepository.GetBy(code);
     return product;
 });
 
-app.MapPut("/changeproduct", (Product product) =>
+app.MapPut("/product", (Product product) =>
 {
    var produto = ProductRepository.GetBy(product.Code);
     produto.Name = product.Name;
 });
-app.MapDelete("/Delete/{code}", ([FromRoute] string code) =>
+app.MapDelete("/product/{code}", ([FromRoute] string code) =>
 {
     ProductRepository.Delete(code);
 });
